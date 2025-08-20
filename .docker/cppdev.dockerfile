@@ -1,4 +1,4 @@
-ARG VARIANT=ubuntu-24.04
+ARG VARIANT=noble
 ARG TARGETPLATFORM
 
 FROM --platform=${TARGETPLATFORM} buildpack-deps:${VARIANT}-curl
