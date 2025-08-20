@@ -11,10 +11,9 @@ ARG TARGETPLATFORM
 COPY .docker/base-scripts/*.sh .docker/patch/*.patch /tmp/
 
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && /bin/bash /tmp/install_common.sh \
-    && apt-get -y install build-essential cmake cppcheck valgrind clang lldb llvm gdb \
+    && chmod u+x /tmp/install_common.sh && /tmp/install_common.sh \
+    && apt-get -y install build-essential cmake cppcheck valgrind clang lldb llvm gdb
     # && apt-get -y install autoconf automake libtool m4 autoconf-archive \
-    && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 ENV VCPKG_ROOT=/usr/local/vcpkg \
     VCPKG_DOWNLOADS=${MOUNTPATH}/share/vcpkg/downloads \
@@ -27,8 +26,9 @@ ENV VCPKG_ROOT=/usr/local/vcpkg \
 ENV PATH="${CONDA_DIR}/bin:${VCPKG_ROOT}:${PATH}"
 
 # Install vcpkg itself: https://github.com/microsoft/vcpkg/blob/master/README.md#quick-start-unix
-RUN chmod u+x /tmp/*.sh \ 
+RUN chmod u+x /tmp/*.sh \
     && ./tmp/install_vcpkg.sh  ${USERNAME} \
     && ./tmp/install_xmake.sh ${USERNAME} \
     && ./tmp/install_miniforge.sh ${USERNAME}\
-    && rm -f /tmp/*
+    && apt-get autoremove -y && apt-get clean -y \
+    && rm -rf /var/lib/apt/lists/* && rm -f /tmp/*

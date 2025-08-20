@@ -7,7 +7,7 @@ package_list="git neovim sudo gnupg2 bash-completion curl wget locales lsof ca-c
     openssh-server aria2 \
     # required by LLVM
     lsb-release zlib1g-dev \
-    init-system-helpers
+    init-system-helpers"
 
 # Include libssl1.1 if available
 if [[ ! -z $(apt-cache --names-only search ^libssl1.1$) ]]; then
