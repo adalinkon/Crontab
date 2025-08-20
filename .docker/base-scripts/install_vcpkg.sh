@@ -82,4 +82,4 @@ chmod -R g+r+w "${VCPKG_ROOT}" "${VCPKG_DOWNLOADS}"
 
 # Enable tab completion for bash and zsh
 VCPKG_FORCE_SYSTEM_BINARIES=1 su "${USERNAME}" -c "${VCPKG_ROOT}/vcpkg integrate bash"
-VCPKG_FORCE_SYSTEM_BINARIES=1 su "${USERNAME}" -c "${VCPKG_ROOT}/vcpkg integrate zsh"
+# VCPKG_FORCE_SYSTEM_BINARIES=1 su "${USERNAME}" -c "${VCPKG_ROOT}/vcpkg integrate zsh"
