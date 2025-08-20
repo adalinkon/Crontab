@@ -12,7 +12,7 @@ COPY .docker/base-scripts/install_common.sh /tmp/
 
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && chmod u+x /tmp/install_common.sh && /tmp/install_common.sh \
-    && apt-get -y install build-essential cmake cppcheck valgrind clang lldb llvm gdb
+    && apt-get -y install build-essential cmake cppcheck valgrind clang lldb llvm gdb \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* && rm -rf /tmp/*
     # && apt-get -y install autoconf automake libtool m4 autoconf-archive \
 
