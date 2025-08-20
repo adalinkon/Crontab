@@ -27,8 +27,8 @@ ENV PATH="${CONDA_DIR}/bin:${VCPKG_ROOT}:${PATH}"
 
 # Install vcpkg itself: https://github.com/microsoft/vcpkg/blob/master/README.md#quick-start-unix
 RUN chmod u+x /tmp/*.sh \
-    && ./tmp/install_vcpkg.sh  ${USERNAME} \
-    && ./tmp/install_xmake.sh ${USERNAME} \
-    && ./tmp/install_miniforge.sh ${USERNAME}\
+    && /tmp/install_vcpkg.sh  ${USERNAME} \
+    && /tmp/install_xmake.sh ${USERNAME} \
+    && /tmp/install_miniforge.sh ${USERNAME}\
     && apt-get autoremove -y && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/* && rm -f /tmp/*
+    && rm -rf /var/lib/apt/lists/* && rm -rf /tmp/*
