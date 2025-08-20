@@ -1,7 +1,8 @@
 ARG VARIANT=noble
 ARG TARGETPLATFORM
 
-FROM --platform=${TARGETPLATFORM} buildpack-deps:${VARIANT}-curl
+# FROM --platform=${TARGETPLATFORM} buildpack-deps:${VARIANT}-curl
+FROM --platform=${TARGETPLATFORM} mcr.microsoft.com/devcontainers/base:${VARIANT}
 USER root
 
 ARG MOUNTPATH=/docker_data
