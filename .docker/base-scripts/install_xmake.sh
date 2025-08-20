@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "running install_xmake.sh"
 USERNAME=${1:-"root"}
 wget --no-hsts --quiet  https://xmake.io/shget.text -O /tmp/xmake.sh
 /bin/bash /tmp/xmake.sh

@@ -28,7 +28,7 @@ ENV PATH="${CONDA_DIR}/bin:${VCPKG_ROOT}:${PATH}"
 
 # Install vcpkg itself: https://github.com/microsoft/vcpkg/blob/master/README.md#quick-start-unix
 COPY .docker/base-scripts/*.sh .docker/patch/*.patch /tmp/
-RUN chmod u+x /tmp/*.sh \
+RUN chmod +x /tmp/*.sh \
     && /tmp/install_vcpkg.sh  ${USERNAME} \
     && /tmp/install_xmake.sh ${USERNAME} \
     && /tmp/install_miniforge.sh ${USERNAME}\

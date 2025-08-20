@@ -3,7 +3,7 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
-
+echo "running install_vcpkg.sh"
 set -e
 
 USERNAME=${1:-"root"}
@@ -63,7 +63,7 @@ git clone --depth=1 \
     -c fetch.fsck.zeroPaddedFilemode=ignore \
     -c receive.fsck.zeroPaddedFilemode=ignore \
     https://github.com/microsoft/vcpkg "${VCPKG_ROOT}"
-git apply --directory="${VCPKG_ROOT}" /tmp/vcpkg*.patch
+# git apply --directory="${VCPKG_ROOT}" /tmp/vcpkg*.patch
 ## Run installer to get latest stable vcpkg binary
 ## https://github.com/microsoft/vcpkg/blob/7e7dad5fe20cdc085731343e0e197a7ae655555b/scripts/bootstrap.sh#L126-L144
 "${VCPKG_ROOT}"/bootstrap-vcpkg.sh

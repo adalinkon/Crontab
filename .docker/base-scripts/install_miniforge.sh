@@ -1,4 +1,6 @@
 #!/bin/bash
+echo "running install_miniforge.sh"
+
 USERNAME=${1:-"root"}
 
 wget --no-hsts --quiet "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh" -O /tmp/miniforge.sh
@@ -13,7 +15,7 @@ if [[ "${USERNAME}" != "root" ]];then
   user_dir="/home/${USERNAME}"
   mkdir -p "${user_dir}"
 fi
-echo ". ${CONDA_DIR}/etc/profile.d/conda.sh" >> /etc/skel/.bashrc && \
+echo ". ${CONDA_DIR}/etc/profile.d/conda.sh" >> /etc/skel/.bashrc
 echo ". ${CONDA_DIR}/etc/profile.d/conda.sh" >> ${user_dir}/.bashrc
 cat > ${user_dir}/.condarc <<EOF
 channels:
