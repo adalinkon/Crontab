@@ -13,7 +13,8 @@ COPY .docker/base-scripts/*.sh .docker/patch/*.patch /tmp/
 
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && chmod u+x /tmp/*.sh && /tmp/install_common.sh && /tmp/install_xmake.sh ${USERNAME}\
-    && apt-get -y install build-essential cmake clang lldb llvm gdb \
+    && apt-get -y install build-essential cmake clang llvm \
+    && apt-get -y install lldb --no-install-recommends\
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
     # && apt-get -y install autoconf automake libtool m4 autoconf-archive \
 
