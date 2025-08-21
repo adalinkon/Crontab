@@ -12,7 +12,7 @@ ARG TARGETPLATFORM
 COPY .docker/base-scripts/*.sh .docker/patch/*.patch /tmp/
 
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && chmod u+x /tmp/*.sh && /tmp/install_common.sh && /tmp/install_xmake.sh ${USERNAME}\
+    && chmod u+x /tmp/*.sh && /tmp/install_common.sh \
     && apt-get -y install build-essential cmake clang llvm \
     && apt-get -y install lldb --no-install-recommends\
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
@@ -33,7 +33,8 @@ ENV PATH="/root/.local/bin:${CONDA_DIR}/bin:${VCPKG_ROOT}:${PATH}"
 # && /tmp/install_xmake.sh ${USERNAME} \
 
 RUN chmod +x /tmp/*.sh \
-    && /tmp/install_miniforge.sh ${USERNAME}\
     && /tmp/install_vcpkg.sh  ${USERNAME} \
+    && /tmp/install_miniforge.sh ${USERNAME}\
+    && /tmp/install_xmake.sh ${USERNAME}\
     && apt-get autoremove -y && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/* && rm -rf /tmp/*
