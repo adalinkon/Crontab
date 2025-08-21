@@ -9,12 +9,12 @@ ARG MOUNTPATH=/docker_data
 ARG USERNAME=root
 ARG TARGETPLATFORM
 
-COPY .docker/base-scripts/install_common.sh /tmp/
+COPY .docker/base-scripts/*.sh .docker/patch/*.patch /tmp/
 
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && chmod u+x /tmp/install_common.sh && /tmp/install_common.sh \
+    && chmod u+x /tmp/*.sh && /tmp/install_common.sh && /tmp/install_xmake.sh ${USERNAME}\
     && apt-get -y install build-essential cmake clang lldb llvm gdb \
-    && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* && rm -rf /tmp/*
+    && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
     # && apt-get -y install autoconf automake libtool m4 autoconf-archive \
 
 ENV VCPKG_ROOT=/usr/local/vcpkg \
@@ -28,9 +28,10 @@ ENV VCPKG_ROOT=/usr/local/vcpkg \
 ENV PATH="${CONDA_DIR}/bin:${VCPKG_ROOT}:${PATH}"
 
 # Install vcpkg itself: https://github.com/microsoft/vcpkg/blob/master/README.md#quick-start-unix
-COPY .docker/base-scripts/*.sh .docker/patch/*.patch /tmp/
+# COPY .docker/base-scripts/*.sh .docker/patch/*.patch /tmp/
+# && /tmp/install_xmake.sh ${USERNAME} \
+
 RUN chmod +x /tmp/*.sh \
-    && /tmp/install_xmake.sh ${USERNAME} \
     && /tmp/install_miniforge.sh ${USERNAME}\
     && /tmp/install_vcpkg.sh  ${USERNAME} \
     && apt-get autoremove -y && apt-get clean -y \
