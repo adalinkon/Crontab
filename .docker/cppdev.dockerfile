@@ -26,7 +26,7 @@ ENV VCPKG_ROOT=/usr/local/vcpkg \
     MOUNTPATH=${MOUNTPATH} \
     CC=/usr/bin/clang \
     CXX=/usr/bin/clang++
-ENV PATH="${CONDA_DIR}/bin:${VCPKG_ROOT}:${PATH}"
+ENV PATH="/root/.local/bin:${CONDA_DIR}/bin:${VCPKG_ROOT}:${PATH}"
 
 # Install vcpkg itself: https://github.com/microsoft/vcpkg/blob/master/README.md#quick-start-unix
 # COPY .docker/base-scripts/*.sh .docker/patch/*.patch /tmp/
